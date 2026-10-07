@@ -1,6 +1,7 @@
 import pygame
 from constants import * 
 from logger import log_state
+from player import Player
 # from the file name constants import everything
 # allow us to use pygame library 
 
@@ -12,6 +13,13 @@ def main():
     # To get a new GUI mode 
     screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
+    player = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2) # to create a player object in the middle of the screen
+    
+    pygame.time.Clock()
+    dt = 0.0 # delta time 
+    clock = pygame.time.Clock() # to control the fram rate of the game
+
+
     while True:
         log_state()
         for event in pygame.event.get():
@@ -19,12 +27,14 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
+        
         screen.fill("black") # for the color of the background maybe
+        player.draw(screen) # to draw the player on the screen
 
         pygame.display.flip() # to refresh the game
-
-
-
+        dt = clock.tick(60) / 1000
+        # print(dt) # to display the delta time in the console.
+    
 
 
 

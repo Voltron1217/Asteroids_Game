@@ -1,8 +1,11 @@
 import pygame
 from constants import * 
-from logger import log_state
+from logger import log_state , log_event
 from player import Player
 from asteroidfield import *
+import sys
+from circleshape import CircleShape
+
 # from the file name constants import everything
 # allow us to use pygame library 
 
@@ -49,16 +52,29 @@ def main():
         # player.draw(screen) # to draw the player on the screen
         # player.update(dt)
         updatable.update(dt)
+        for asteroid in asteroids:
+            if player.collides_with(asteroid):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit() # exits the game once it hits the asteroid. 
+
+
+        asteroids.update(dt)
+        
+
         
         for drawn in drawable:
             drawn.draw(screen)
         
+        
+
 
 
 
         pygame.display.flip() # to refresh the game
         dt = clock.tick(60) / 1000
         # print(dt) # to display the delta time in the console.
+        
     
 
 

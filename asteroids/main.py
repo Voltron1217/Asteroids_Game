@@ -5,6 +5,7 @@ from player import Player
 from asteroidfield import *
 import sys
 from circleshape import CircleShape
+from shot import Shot
 
 # from the file name constants import everything
 # allow us to use pygame library 
@@ -22,9 +23,11 @@ def main():
     
     drawable = pygame.sprite.Group()# to add the player to the updatable and drawable
     asteroids = pygame.sprite.Group() # to create a group of asteroids that can be updated and drawn
-    
-    # new asteroid object 
+    shots = pygame.sprite.Group() # to create a group of shots that can be updated and drawn
 
+    
+    
+    Shot.containers = (shots,updatable,drawable)
     AsteroidField.containers = (updatable,) # to add the asteroid field to the updatable and drawable
     Asteroid.containers = (asteroids, updatable, drawable)
     Player.containers = (updatable,drawable)

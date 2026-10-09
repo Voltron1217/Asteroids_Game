@@ -54,6 +54,8 @@ def main():
         screen.fill("black") # for the color of the background maybe
         # player.draw(screen) # to draw the player on the screen
         # player.update(dt)
+
+
         updatable.update(dt)
         for asteroid in asteroids:
             if player.collides_with(asteroid):
@@ -61,8 +63,15 @@ def main():
                 print("Game over!")
                 sys.exit() # exits the game once it hits the asteroid. 
 
+        # to destroy the asteroids with the bullet in contact
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                   log_event("asteroid_shot")
+                   asteroid.split()
+                   shot.kill()
 
-        asteroids.update(dt)
+        # asteroids.update(dt)
         
 
         
